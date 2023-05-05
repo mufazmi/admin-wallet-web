@@ -27,7 +27,6 @@ const authSlice = createSlice({
         },
         setLogin: (state, action) => {
             state.isLoading = false;
-            state.isAuth = true;
 
             const token = action.payload.token;
             if (action.payload.statusCode === 2) {
@@ -36,6 +35,8 @@ const authSlice = createSlice({
             if (action.payload.statuCode === 1 || token) {
                 state.user.token = action.payload.token
                 localStorage.setItem('token', action.payload.token)
+                if (token)
+                    state.isAuth = true;
             }
         },
         failedLogin: (state, action?: PayloadAction<any>) => {
