@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../interfaces/user";
+import Toast from "../../utils/toast";
 
 const initialState = {
     isAuth: false,
@@ -19,8 +20,10 @@ const authSlice = createSlice({
         setLogin: (state, action) => {
             state.isLoading = false;
             state.isAuth = true;
-            if (action.payload.statusCode === 2)
+            if (action.payload.statusCode === 2){
+                Toast.showSuccessToast(action.payload.message ?? 'Enter OTP')
                 state.showOtpForm = true
+            }
             if(action.payload.statuCode===1)
                 console.log(action.payload)
         },
