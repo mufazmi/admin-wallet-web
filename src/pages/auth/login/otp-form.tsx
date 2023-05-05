@@ -11,7 +11,7 @@ const OtpForm = () => {
 
     const dispatch = useDispatch();
 
-    const { isLoading, showOtpForm,user } = useSelector((state: RootState) => state.auth)
+    const { isLoading, errors: apiError, user } = useSelector((state: RootState) => state.auth)
 
     const initialState = {
         mobile: user.mobile,
@@ -31,7 +31,7 @@ const OtpForm = () => {
             const payload = {
                 mobile: user.mobile,
                 otp: data.otp,
-                mac_id: Utils.getUniqueId()
+                mac_id: localStorage.getItem('mac_id')
             }
             console.log({ payload })
             dispatch(getLoginVerification(payload))
@@ -45,24 +45,7 @@ const OtpForm = () => {
             <div className="brand-logo">
                 <img src="images/logo.svg" alt="logo" />
             </div>
-            <h4>Hello! Complete One Time Verification</h4>
-            <h6 className="font-weight-light">Verify OTP to continue.</h6>
             <form className="pt-3" onSubmit={handleSubmit(onSubmit)}>
-
-                <Controller
-                    name="mobile"
-                    control={control}
-                    render={({ field }) => (
-
-                        <div className="form-group">
-                            <input
-                                {...field}
-                                type="number" readOnly className="form-control form-control-lg" id="mobile" placeholder="Mobile" />
-                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.mobile?.message}</span>
-                        </div>
-                    )}
-                />
-
                 <Controller
                     name="otp"
                     control={control}
@@ -72,7 +55,7 @@ const OtpForm = () => {
                             <input
                                 {...field}
                                 type="number" readOnly={isLoading} className="form-control form-control-lg" id="otp" placeholder="OTP" />
-                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.otp?.message}</span>
+                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.otp?.message || apiError.otp}</span>
                         </div>
                     )}
                 />
@@ -80,22 +63,6 @@ const OtpForm = () => {
                 <div className="mt-3">
                     <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" disabled={isLoading} type="submit">VERIFY OTP</button>
                 </div>
-                {/* <div className="my-2 d-flex justify-content-between align-items-center">
-                    <div className="form-check">
-                        <label className="form-check-label text-muted">
-                            <input type="checkbox" className="form-check-input" />
-                            Keep me signed in
-                        </label>
-                    </div>
-                </div> */}
-                {/* <div className="mb-2">
-                    <button type="button" className="btn btn-block btn-facebook auth-form-btn">
-                        <i className="ti-facebook mr-2"></i>Connect using facebook
-                    </button>
-                </div>
-                <div className="text-center mt-4 font-weight-light">
-                    Don't have an account? <a href="register.html" className="text-primary">Create</a>
-                </div> */}
             </form>
         </div>
     )

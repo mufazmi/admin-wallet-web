@@ -2,11 +2,37 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import OtpForm from "./otp-form";
 import LoginForm from "./login-form";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
 
-    const { showOtpForm } = useSelector((state: RootState) => state.auth)
 
+    const { showOtpForm,isAuth } = useSelector((state: RootState) => state.auth)
+
+    const navigate = useNavigate();
+
+    let uniqueId = localStorage.getItem('mac_id');
+
+    if (!uniqueId) {
+        const randomNumber = Math.floor(Math.random() * 100000000);
+        localStorage.setItem('mac_id', randomNumber.toString());
+    }
+
+
+    useEffect(() => {
+        let uniqueId = localStorage.getItem('mac_id');
+
+        if (!uniqueId) {
+            const randomNumber = Math.floor(Math.random() * 100000000);
+            localStorage.setItem('mac_id', randomNumber.toString());
+        }
+    
+        console.log();
+        if (isAuth) {
+          navigate("/dashboard");
+        }
+      }, [isAuth]);
 
     return (
         <>
@@ -17,8 +43,8 @@ const LoginPage = () => {
                             <div className="col-lg-4 mx-auto">
                                 {
                                     showOtpForm ?
-                                    <OtpForm/> :
-                                    <LoginForm/>
+                                        <OtpForm /> :
+                                        <LoginForm />
                                 }
                             </div>
                         </div>

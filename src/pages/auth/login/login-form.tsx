@@ -11,11 +11,11 @@ const LoginForm = () => {
 
     const dispatch = useDispatch();
 
-    const { isLoading, showOtpForm } = useSelector((state: RootState) => state.auth)
+    const { isLoading, errors: apiError } = useSelector((state: RootState) => state.auth)
 
     const initialState = {
-        mobile: '9867503256',
-        password: '123456'
+        mobile: '',
+        password: ''
     }
 
     const { control, reset, handleSubmit, formState } = useForm({
@@ -31,7 +31,7 @@ const LoginForm = () => {
             const payload = {
                 mobile: data.mobile,
                 password: data.password,
-                mac_id: Utils.getUniqueId()
+                mac_id: localStorage.getItem('mac_id')
             }
             console.log({ payload })
             dispatch(getLogin(payload))
@@ -58,7 +58,7 @@ const LoginForm = () => {
                             <input
                                 {...field}
                                 type="number" readOnly={isLoading} className="form-control form-control-lg" id="mobile" placeholder="Mobile" />
-                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.mobile?.message}</span>
+                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.mobile?.message || apiError.mobile}</span>
                         </div>
                     )}
                 />
@@ -72,29 +72,12 @@ const LoginForm = () => {
                             <input
                                 {...field}
                                 type="password" readOnly={isLoading} className="form-control form-control-lg" id="password" placeholder="Password" />
-                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.password?.message}</span>
+                            <span style={{ color: 'red', fontSize: '12px', opacity: 0.6 }}>{errors?.password?.message || apiError.password}</span>
                         </div>
                     )}
                 />
                 <div className="mt-3">
                     <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" disabled={isLoading} type="submit">SIGN IN</button>
-                </div>
-                <div className="my-2 d-flex justify-content-between align-items-center">
-                    <div className="form-check">
-                        <label className="form-check-label text-muted">
-                            <input type="checkbox" className="form-check-input" />
-                            Keep me signed in
-                        </label>
-                    </div>
-                    <a href="#" className="auth-link text-black">Forgot password?</a>
-                </div>
-                <div className="mb-2">
-                    <button type="button" className="btn btn-block btn-facebook auth-form-btn">
-                        <i className="ti-facebook mr-2"></i>Connect using facebook
-                    </button>
-                </div>
-                <div className="text-center mt-4 font-weight-light">
-                    Don't have an account? <a href="register.html" className="text-primary">Create</a>
                 </div>
             </form>
         </div>

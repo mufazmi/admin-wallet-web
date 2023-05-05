@@ -1,3 +1,4 @@
 export interface IUser {
-    mobile: string
+    mobile: string,
+    token?: string
 }

@@ -1,12 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../interfaces/user";
-import Toast from "../../utils/toast";
+
+
+const errorState = {
+    mobile: '',
+    password: '',
+    otp: ''
+}
 
 const initialState = {
     isAuth: false,
     isLoading: false,
-    showOtpForm: true,
-    user: { mobile: '' } as IUser
+    showOtpForm: false,
+    errors: { ...errorState },
+    user: { mobile: '', token: '' } as IUser
 }
 
 const authSlice = createSlice({
@@ -16,26 +23,43 @@ const authSlice = createSlice({
         getLogin: (state, action: { type: string, payload: { mobile: string, password: string } }) => {
             state.isLoading = true;
             state.user.mobile = action.payload.mobile
+            state.errors = errorState
         },
         setLogin: (state, action) => {
             state.isLoading = false;
             state.isAuth = true;
+
+            const token = action.payload.token;
             if (action.payload.statusCode === 2) {
-                Toast.showSuccessToast(action.payload.message ?? 'Enter OTP')
                 state.showOtpForm = true
             }
-            if (action.payload.statuCode === 1)
-                console.log(action.payload)
+            if (action.payload.statuCode === 1 || token) {
+                state.user.token = action.payload.token
+                localStorage.setItem('token', action.payload.token)
+            }
         },
         failedLogin: (state, action?: PayloadAction<any>) => {
             state.isLoading = false;
-            Toast.showErrorToast(action?.payload?.message ?? 'Login Failed')
+            const msg = action?.payload.message;
+            if (msg == 'Invalid Mobile number')
+                state.errors.mobile = msg
+
+            if (msg.toLowerCase().includes('blocked'))
+                state.errors.mobile = msg
+
+            if (msg.toLowerCase().includes('invalid password'))
+                state.errors.password = msg
+
+            if (msg.toLowerCase().includes('invalid otp'))
+                state.errors.otp = msg
+
         },
         getLoginVerification: (state, action) => {
-            
+            state.isLoading = true;
+            state.errors = errorState
         }
     }
 });
 
-export const { getLogin, setLogin, failedLogin,getLoginVerification } = authSlice.actions;
+export const { getLogin, setLogin, failedLogin, getLoginVerification } = authSlice.actions;
 export default authSlice.reducer;
