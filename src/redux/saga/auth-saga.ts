@@ -1,5 +1,5 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { apiLogin } from '../../http';
+import { apiLogin, apiLoginVerification } from '../../http';
 // import { ResponseDefault } from "../../interfaces/interface-response";
 import { failedLogin, setLogin } from "../slice/auth-slice";
 // import { ResponseLogin } from "../../response/response-login";
@@ -17,17 +17,36 @@ function* workLogin({ payload }: any): Generator<object, any, object> {
                 response
             ));
         } else {
-            yield put(failedLogin(response))
+            yield put(failedLogin(response.response.data))
         }
     }
     catch (e) {
-        console.log('saga', e)
         yield put(failedLogin(e))
-        console.log('sagass', e)
+    }
+}
+
+function* workLoginVerification({payload}:any) : Generator<object,any,object>{
+    try{
+        console.log("workLoginVerificationPayload is",workLoginVerification);
+        const res : any = yield call(apiLoginVerification,payload)
+        const response : any = res.data;
+        if (response.status == 'success') {
+            yield put(setLogin(
+                response
+            ));
+        } else {
+            yield put(failedLogin(response))
+        }
+    }catch(e){
+        yield put(failedLogin(e))
     }
 }
 
 
 export function* watchLogin() {
     yield takeLatest('auth/getLogin', workLogin);
+}
+
+export function* watchLoginLoginVerification() {
+    yield takeLatest('auth/getLoginVerification', workLoginVerification);
 }

@@ -20,18 +20,22 @@ const authSlice = createSlice({
         setLogin: (state, action) => {
             state.isLoading = false;
             state.isAuth = true;
-            if (action.payload.statusCode === 2){
+            if (action.payload.statusCode === 2) {
                 Toast.showSuccessToast(action.payload.message ?? 'Enter OTP')
                 state.showOtpForm = true
             }
-            if(action.payload.statuCode===1)
+            if (action.payload.statuCode === 1)
                 console.log(action.payload)
         },
         failedLogin: (state, action?: PayloadAction<any>) => {
             state.isLoading = false;
+            Toast.showErrorToast(action?.payload?.message ?? 'Login Failed')
+        },
+        getLoginVerification: (state, action) => {
+            
         }
     }
 });
 
-export const { getLogin, setLogin, failedLogin } = authSlice.actions;
+export const { getLogin, setLogin, failedLogin,getLoginVerification } = authSlice.actions;
 export default authSlice.reducer;
