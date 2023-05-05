@@ -4,7 +4,7 @@ import { IUser } from "../../interfaces/user";
 const initialState = {
     isAuth: false,
     isLoading: false,
-    showOtpForm : true,
+    showOtpForm: false,
     user: { mobile: '' } as IUser
 }
 
@@ -19,7 +19,10 @@ const authSlice = createSlice({
         setLogin: (state, action) => {
             state.isLoading = false;
             state.isAuth = true;
-            state.user = action.payload;
+            if (action.payload.statusCode === 2)
+                state.showOtpForm = true
+            if(action.payload.statuCode===1)
+                console.log(action.payload)
         },
         failedLogin: (state, action?: PayloadAction<any>) => {
             state.isLoading = false;

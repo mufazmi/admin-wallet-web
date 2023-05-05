@@ -10,19 +10,14 @@ function* workLogin({ payload }: any): Generator<object, any, object> {
         console.log('saga payload', payload);
         const res: any = yield call(apiLogin, payload);
         const response: any = res.data;
-        console.log("Response from server is::::::",response)
-        if (res.status === 200) {
-            if (response.success == 'success') {
-                yield put(setLogin(
-                    response.data
-                ));
-            } else {
-                yield put(failedLogin(response.error))
-            }
-        } 
-        
-        else {
-            yield put(failedLogin(response.error))
+        console.log("Response from server is::::::", response)
+        console.log("response.status == 'success'",response.success == 'success',response.success);
+        if (response.status == 'success') {
+            yield put(setLogin(
+                response
+            ));
+        } else {
+            yield put(failedLogin(response))
         }
     }
     catch (e) {
