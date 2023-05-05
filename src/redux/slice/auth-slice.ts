@@ -5,7 +5,7 @@ import Toast from "../../utils/toast";
 const initialState = {
     isAuth: false,
     isLoading: false,
-    showOtpForm: false,
+    showOtpForm: true,
     user: { mobile: '' } as IUser
 }
 
