@@ -1,14 +1,12 @@
-import Navbar from "../../components/navbar"
-import Sidebar from "../../components/sidebar"
-
+import Layout from "../../components/layout/layout"
 
 const DashboardPage = () =>{
 
     return (
-        <>
-        <Navbar/>
-        <Sidebar/>
-        </>
+        <Layout>
+            {/* <Table/> */}
+            this is dashboard
+        </Layout>
     )
 
 }

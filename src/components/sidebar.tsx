@@ -16,7 +16,7 @@ const Sidebar = () => {
     },[])
 
     return (
-        <nav className="sidebar sidebar-offcanvas" id="sidebar" style={{marginTop:'55px'}}>
+        <nav className="sidebar sidebar-offcanvas" id="sidebar">
             <ul className="nav">
                 {!isLoading && navigations.length > 0 && navigations.map((e,index) => {
                     return e.sub_menu.length > 0 ?

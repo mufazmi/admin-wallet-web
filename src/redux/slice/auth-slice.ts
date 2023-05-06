@@ -9,7 +9,7 @@ const errorState = {
 }
 
 const initialState = {
-    isAuth: false,
+    isAuth: localStorage.getItem('token') != null,
     isLoading: false,
     showOtpForm: false,
     form: 'login',
@@ -120,7 +120,13 @@ const authSlice = createSlice({
 
         setFormState: (state, action) => {
             state.form = action.payload
+        },
+
+        doLogout : (state, action) => {
+            state.isAuth = false
+            localStorage.removeItem('token')
         }
+
 
     }
 });

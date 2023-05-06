@@ -3,13 +3,15 @@ import authSlice from "../slice/auth-slice";
 import createSagaMiddleware from "@redux-saga/core";
 import rootSaga from "../saga/root-saga";
 import dashboardSlice from "../slice/dashboard-slice";
+import walletSlice from "../slice/wallet-slice";
 
 const saga = createSagaMiddleware()
 
 const store = configureStore({
     reducer: {
         auth: authSlice,
-        dashboard : dashboardSlice
+        dashboard : dashboardSlice,
+        wallet:walletSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga)
 });
