@@ -12,8 +12,11 @@ const initialState = {
     isAuth: false,
     isLoading: false,
     showOtpForm: false,
+    form: 'login',
+    // form: 'reset',
     errors: { ...errorState },
     user: { mobile: '', token: '' } as IUser
+    // user: { mobile: '9867503256', token: '' } as IUser
 }
 
 const authSlice = createSlice({
@@ -31,6 +34,7 @@ const authSlice = createSlice({
             const token = action.payload.token;
             if (action.payload.statusCode === 2) {
                 state.showOtpForm = true
+                state.form = 'otp'
             }
             if (action.payload.statuCode === 1 || token) {
                 state.user.token = action.payload.token
@@ -58,9 +62,77 @@ const authSlice = createSlice({
         getLoginVerification: (state, action) => {
             state.isLoading = true;
             state.errors = errorState
+        },
+
+        getForgotPassword: (state, action) => {
+            state.isLoading = true;
+            state.user.mobile = action.payload.mobile
+            state.errors = errorState
+        },
+
+        setForgotPassword: (state, action) => {
+            state.isLoading = false;
+            state.form = 'reset'
+        },
+
+        failedForgotPassword: (state, action?: PayloadAction<any>) => {
+            state.isLoading = false;
+            const msg = action?.payload.message;
+            if (msg.toLowerCase().includes('invalid mobile number'))
+                state.errors.mobile = msg
+
+            if (msg.toLowerCase().includes('blocked'))
+                state.errors.mobile = msg
+
+            if (msg.toLowerCase().includes('invalid password'))
+                state.errors.password = msg
+
+            if (msg.toLowerCase().includes('invalid otp'))
+                state.errors.otp = msg
+        },
+
+        getResetPassword: (state, action) => {
+            state.isLoading = true;
+            state.errors = errorState
+        },
+
+        setResetPassword: (state, action) => {
+            state.isLoading = false;
+            state.form = 'login'
+        },
+
+        failedResetPassword: (state, action?: PayloadAction<any>) => {
+            state.isLoading = false;
+            const msg = action?.payload.message;
+            if (msg.toLowerCase().includes('invalid mobile number'))
+                state.errors.mobile = msg
+
+            if (msg.toLowerCase().includes('blocked'))
+                state.errors.mobile = msg
+
+            if (msg.toLowerCase().includes('invalid password'))
+                state.errors.password = msg
+
+            if (msg.toLowerCase().includes('invalid otp'))
+                state.errors.otp = msg
+
+        },
+
+        setFormState: (state, action) => {
+            state.form = action.payload
         }
+
     }
 });
 
-export const { getLogin, setLogin, failedLogin, getLoginVerification } = authSlice.actions;
+export const { getLogin, setLogin, failedLogin,
+    getLoginVerification,
+    getForgotPassword,
+    setForgotPassword,
+    failedForgotPassword,
+    getResetPassword,
+    setResetPassword,
+    failedResetPassword,
+    setFormState,
+} = authSlice.actions;
 export default authSlice.reducer;

@@ -4,11 +4,13 @@ import OtpForm from "./otp-form";
 import LoginForm from "./login-form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ForgotForm from "./forgot-form";
+import ResetForm from "./reset-form";
 
 const LoginPage = () => {
 
 
-    const { showOtpForm,isAuth } = useSelector((state: RootState) => state.auth)
+    const { form, isAuth } = useSelector((state: RootState) => state.auth)
 
     const navigate = useNavigate();
 
@@ -29,9 +31,9 @@ const LoginPage = () => {
         }
 
         if (isAuth) {
-          navigate('/');
+            navigate('/');
         }
-      }, [isAuth]);
+    }, [isAuth]);
 
     return (
         <>
@@ -41,9 +43,15 @@ const LoginPage = () => {
                         <div className="row w-100 mx-0">
                             <div className="col-lg-4 mx-auto">
                                 {
-                                    showOtpForm ?
-                                        <OtpForm /> :
-                                        <LoginForm />
+                                    form === 'login' ?
+                                        <LoginForm /> :
+                                        form === 'otp' ?
+                                            <OtpForm /> :
+                                            form === 'forgot' ?
+                                                <ForgotForm /> :
+                                                form === 'reset' ?
+                                                    <ResetForm />
+                                                    : <h1></h1>
                                 }
                             </div>
                         </div>
