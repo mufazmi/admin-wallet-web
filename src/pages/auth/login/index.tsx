@@ -29,7 +29,7 @@ const LoginPage = () => {
         }
 
         if (isAuth) {
-          navigate("/dashboard");
+          navigate('/');
         }
       }, [isAuth]);
 

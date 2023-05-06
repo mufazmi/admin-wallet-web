@@ -20,9 +20,9 @@ const MyRoute = () => {
 
     return (
         <Routes>
-            {/* <Route element={<PrivateRoutes />}> */}
+            <Route element={<PrivateRoutes />}>
                 <Route path={ROUTE_DASHBOARD} element={<DashboardPage />} />
-            {/* </Route> */}
+            </Route>
             <Route path={ROUTE_LOGIN} element={<LoginPage />} />
         </Routes>
     )
