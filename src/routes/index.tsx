@@ -6,9 +6,8 @@ import { useSelector } from "react-redux";
 
 import { Navigate, Outlet } from 'react-router-dom'
 
-const ROUTE_HOME = '/'
 const ROUTE_LOGIN = '/login'
-const ROUTE_DASHBOARD = '/dashboard'
+const ROUTE_DASHBOARD = '/'
 
 const PrivateRoutes = () => {
     const isAuth = useSelector((state: RootState) => state.auth.isAuth);
@@ -24,7 +23,6 @@ const MyRoute = () => {
             {/* <Route element={<PrivateRoutes />}> */}
                 <Route path={ROUTE_DASHBOARD} element={<DashboardPage />} />
             {/* </Route> */}
-            <Route path={ROUTE_HOME} element={<LoginPage />} />
             <Route path={ROUTE_LOGIN} element={<LoginPage />} />
         </Routes>
     )
