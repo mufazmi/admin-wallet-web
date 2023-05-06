@@ -19,12 +19,11 @@ const PrivateRoutes = () => {
 
 const MyRoute = () => {
 
-    const isAuth = useSelector((state: RootState) => state.auth.isAuth);
     return (
         <Routes>
-            <Route element={<PrivateRoutes />}>
+            {/* <Route element={<PrivateRoutes />}> */}
                 <Route path={ROUTE_DASHBOARD} element={<DashboardPage />} />
-            </Route>
+            {/* </Route> */}
             <Route path={ROUTE_HOME} element={<LoginPage />} />
             <Route path={ROUTE_LOGIN} element={<LoginPage />} />
         </Routes>

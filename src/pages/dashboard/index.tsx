@@ -1,9 +1,14 @@
+import Navbar from "../../components/navbar"
+import Sidebar from "../../components/sidebar"
 
 
 const DashboardPage = () =>{
 
     return (
-        <h1>This is demo dashboard page</h1>
+        <>
+        <Navbar/>
+        <Sidebar/>
+        </>
     )
 
 }
