@@ -33,7 +33,6 @@ const OtpForm = () => {
                 otp: data.otp,
                 mac_id: localStorage.getItem('mac_id')
             }
-            console.log({ payload })
             dispatch(getLoginVerification(payload))
         } else {
             console.log("Form validation error")

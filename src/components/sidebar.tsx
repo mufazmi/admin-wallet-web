@@ -20,8 +20,8 @@ const Sidebar = () => {
             <ul className="nav">
                 {!isLoading && navigations.length > 0 && navigations.map((e,index) => {
                     return e.sub_menu.length > 0 ?
-                        <DropDownRwo key={e.id} data={e} index={index}/> :
-                        <SingleRow key={e.id} data={e}/>
+                        <DropDownRwo key={index+'multi'} data={e} index={index}/> :
+                        <SingleRow key={index+'single'} data={e}/>
                 })}
             </ul>
         </nav>

@@ -16,7 +16,6 @@ const dashboardSlice = createSlice({
   reducers: {
     getNavigations: (state) => {
       state.isLoading = true;
-      console.log("dashboardSlice->getNavigations");
     },
     setNavigations: (state, action: PayloadAction<any>) => {
       state.isLoading = false;

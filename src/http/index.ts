@@ -20,8 +20,6 @@ export const apiLoginVerification: any = async (data: any) => await api.post(END
 export const apiGetNavigations: any = async (data: any) => await api.get('');
 
 axios.interceptors.request.use((request: any): any => {
-    console.log('request interceptor', request);
-    console.log('addBrand addBrand', request.headers);
 }, (err) => {
     console.log('error is', err);
     return Promise.reject(err);

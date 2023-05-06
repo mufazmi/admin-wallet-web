@@ -13,7 +13,7 @@ const DropDownRwo = ({data,index}:any) => {
                 <ul className="nav flex-column sub-menu">
                     {
                         data.sub_menu.map((e:any)=>{
-                            return <li className="nav-item"> <Link className="nav-link" to={e.url}>{e.pagename}</Link></li>
+                            return <li key={e.pagename} className="nav-item"> <Link className="nav-link" to={e.url}>{e.pagename}</Link></li>
                         })
                     }
                 </ul>

@@ -32,7 +32,6 @@ const LoginPage = () => {
                 password: data.password,
                 mac_id: Utils.getUniqueId()
             }
-            console.log({ payload })
             dispatch(getLogin(payload))
         } else {
             console.log("Form validation error")

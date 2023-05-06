@@ -7,7 +7,6 @@ import { failedLogin, setLogin } from "../slice/auth-slice";
 
 function* workLogin({ payload }: any): Generator<object, any, object> {
     try {
-        console.log('saga payload', payload);
         const res: any = yield call(apiLogin, payload);
         const response: any = res.data;
         if (response.status == 'success') {

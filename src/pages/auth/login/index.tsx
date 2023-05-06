@@ -27,8 +27,7 @@ const LoginPage = () => {
             const randomNumber = Math.floor(Math.random() * 100000000);
             localStorage.setItem('mac_id', randomNumber.toString());
         }
-    
-        console.log();
+
         if (isAuth) {
           navigate("/dashboard");
         }
