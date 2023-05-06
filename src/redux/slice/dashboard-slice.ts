@@ -1,32 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-const initialState = {
-    isLoading: true,
-    navigations: []
+interface DashboardState {
+  isLoading: boolean;
+  navigations: any[]; 
 }
 
+const initialState: DashboardState = {
+  isLoading: true,
+  navigations: [],
+};
 
 const dashboardSlice = createSlice({
-    name: 'dashboard',
-    initialState,
-    reducers: {
-        getNavigations: (state, action) => {
-            state.isLoading = true;
-
-        },
-
-        setNavigations: (state, action) => {
-            state.isLoading = false
-
-        },
-
-        failedNavigations: (state, action) => {
-            state.isLoading = false
-
-        }
-    }
+  name: "dashboard",
+  initialState,
+  reducers: {
+    getNavigations: (state) => {
+      state.isLoading = true;
+      console.log("dashboardSlice->getNavigations");
+    },
+    setNavigations: (state, action: PayloadAction<any>) => {
+      state.isLoading = false;
+      state.navigations = action.payload;
+    },
+    failedNavigations: (state) => {
+      state.isLoading = false;
+      state.navigations = [];
+    },
+  },
 });
 
-export const { getNavigations, setNavigations, failedNavigations } = dashboardSlice.actions
-export default dashboardSlice.reducer
+export const { getNavigations, setNavigations, failedNavigations } =
+  dashboardSlice.actions;
+
+export default dashboardSlice.reducer;

@@ -7,7 +7,7 @@ const Sidebar = () => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(getNavigations)
+        dispatch(getNavigations())
     },[])
 
     return (
