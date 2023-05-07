@@ -4,22 +4,31 @@ interface State {
     isLoading: boolean;
     isSummariesLoading: boolean;
     isFetchBalanceLoading: boolean;
-    isDepositLoading: boolean;
+    isDepositProcessing: boolean;
     isBalanceTransferLoading: boolean;
-    isPurchaseOrderLoading: boolean;
+    isPurchaseOrderProcessing: boolean;
     walletSummaries: any[];
     metaData?: any,
+    errors: {
+        amount?: number
+    }
+}
+const errors = {
+    amount: ''
 }
 
 const initialState: State = {
     isLoading: true,
     isSummariesLoading: true,
     isFetchBalanceLoading: true,
-    isDepositLoading: true,
+    isDepositProcessing: false,
     isBalanceTransferLoading: true,
-    isPurchaseOrderLoading: true,
+    isPurchaseOrderProcessing: false,
     walletSummaries: [],
-    metaData: {}
+    metaData: {},
+    errors: {
+        amount: undefined
+    }
 };
 
 const walletSlice = createSlice({
@@ -64,11 +73,11 @@ const walletSlice = createSlice({
         },
 
         //Deposit
-        getDeposit: (state) => {
-            state.isDepositLoading = true;
+        getDeposit: (state,action) => {
+            state.isDepositProcessing = true;
         },
         setDeposit: (state, action: PayloadAction<any>) => {
-            state.isDepositLoading = false;
+            state.isDepositProcessing = false;
             const { total_rows, page, limits, results } = action.payload;
             state.metaData = {
                 total_rows,
@@ -78,7 +87,7 @@ const walletSlice = createSlice({
             state.walletSummaries = results
         },
         failedDeposit: (state) => {
-            state.isDepositLoading = false;
+            state.isDepositProcessing = false;
             state.walletSummaries = [];
         },
 
@@ -103,10 +112,10 @@ const walletSlice = createSlice({
 
         //PurchaseOrder
         getPurchaseOrder: (state) => {
-            state.isPurchaseOrderLoading = true;
+            state.isPurchaseOrderProcessing = true;
         },
         setPurchaseOrder: (state, action: PayloadAction<any>) => {
-            state.isPurchaseOrderLoading = false;
+            state.isPurchaseOrderProcessing = false;
             const { total_rows, page, limits, results } = action.payload;
             state.metaData = {
                 total_rows,
@@ -116,7 +125,7 @@ const walletSlice = createSlice({
             state.walletSummaries = results
         },
         failedPurchaseOrder: (state) => {
-            state.isPurchaseOrderLoading = false;
+            state.isPurchaseOrderProcessing = false;
             state.walletSummaries = [];
         },
 

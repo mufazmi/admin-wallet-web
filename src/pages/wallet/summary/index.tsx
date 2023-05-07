@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getWalletSummaries } from "../../../redux/slice/wallet-slice";
 import { RootState } from "../../../redux/store";
+import Modal from "../../../components/modal/modal";
+import PurchaseOrderModal from "../../dashboard/purchase-order";
+import DepositMoneyModal from "../../dashboard/deposit-money";
+import BalanceTransferModal from "../../dashboard/balance-transfer";
 
 const WalletSummaryPage = () => {
 
@@ -31,6 +35,15 @@ const WalletSummaryPage = () => {
                 })}
 
             </Table>
+
+            {/* <PurchaseOrderModal /> */}
+
+            <DepositMoneyModal/>
+
+            {/* <BalanceTransferModal /> */}
+
+
+
         </Layout>
     )
 }

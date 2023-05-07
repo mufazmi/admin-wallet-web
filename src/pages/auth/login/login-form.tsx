@@ -78,7 +78,7 @@ const LoginForm = () => {
                 <div className="mt-3">
                     <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" disabled={isLoading} type="submit">SIGN IN</button>
                 </div>
-                <div style={{textAlign: 'center', paddingTop: '13px', cursor: 'pointer' }} onClick={() => dispatch(setFormState('forgot'))} className="auth-link text-black">Forgot password?</div>
+                <div style={{ textAlign: 'center', paddingTop: '13px', cursor: 'pointer' }} onClick={() => dispatch(setFormState('forgot'))} className="auth-link text-black">Forgot password?</div>
             </form >
         </div >
     )
