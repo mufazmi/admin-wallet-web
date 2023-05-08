@@ -14,7 +14,7 @@ const Sidebar = () => {
     useEffect(() => {
         if (navigations.length < 1)
             dispatch(getNavigations())
-    }, [isLoading])
+    }, [])
 
     return (
         <nav className="sidebar sidebar-offcanvas" id="sidebar">

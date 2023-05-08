@@ -10,6 +10,7 @@ const errorState = {
 
 const initialState = {
     isAuth: localStorage.getItem('token') != null,
+    token : localStorage.getItem('token'),
     isLoading: false,
     showOtpForm: false,
     form: 'login',
@@ -39,8 +40,10 @@ const authSlice = createSlice({
             if (action.payload.statuCode === 1 || token) {
                 state.user.token = action.payload.token
                 localStorage.setItem('token', action.payload.token)
-                if (token)
+                if (token){
                     state.isAuth = true;
+                    window.location.reload()
+                }
             }
         },
         failedLogin: (state, action?: PayloadAction<any>) => {
@@ -124,6 +127,7 @@ const authSlice = createSlice({
 
         doLogout : (state, action) => {
             state.isAuth = false
+            state.token = ''
             localStorage.removeItem('token')
         }
 
@@ -140,5 +144,6 @@ export const { getLogin, setLogin, failedLogin,
     setResetPassword,
     failedResetPassword,
     setFormState,
+    doLogout
 } = authSlice.actions;
 export default authSlice.reducer;

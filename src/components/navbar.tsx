@@ -1,5 +1,15 @@
+import { useDispatch } from "react-redux"
+
+import { doLogout } from '../redux/slice/auth-slice';
 
 const Navbar = () => {
+
+    const dispatch = useDispatch();
+
+    const onLogout = () => {
+        console.log("On Logout Called");
+        dispatch(doLogout(''))
+    }
 
     return (
         <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -112,7 +122,7 @@ const Navbar = () => {
                                 <i className="ti-settings text-primary"></i>
                                 Settings
                             </a>
-                            <a className="dropdown-item">
+                            <a className="dropdown-item" onClick={()=>onLogout()}>
                                 <i className="ti-power-off text-primary"></i>
                                 Logout
                             </a>
