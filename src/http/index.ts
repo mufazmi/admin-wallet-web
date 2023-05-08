@@ -23,19 +23,19 @@ export const apiResetPassword: any = async (data: any) => await api.post(ENDPOIN
 
 export const apiGetNavigations: any = async (data: any) => await api.get(ENDPOINT_GET_NAVIGATIONS);
 
-export const apiGetWalletSummaries: any = async (data: any) => await api.get(ENDPOINT_WALLET_SUMMARIES);
+export const apiGetWalletSummaries: any = async (data: any) => await api.post(ENDPOINT_WALLET_SUMMARIES, data);
 
-export const apiFetchBalance: any = async (data: any) => await api.get(ENDPOINT_FETCH_BALANCE);
+export const apiFetchBalance: any = async (data: any) => await api.post(ENDPOINT_FETCH_BALANCE, data);
 
-export const apiDeposit: any = async (data: any) => await api.get(ENDPOINT_DEPOSIT);
+export const apiDeposit: any = async (data: any) => await api.post(ENDPOINT_DEPOSIT, data);
 
-export const apiPurchaseOrder: any = async (data: any) => await api.get(ENDPOINT_PURCHASE_ORDER);
+export const apiPurchaseOrder: any = async (data: any) => await api.post(ENDPOINT_PURCHASE_ORDER, data);
 
-export const apiFetch: any = async (data: any) => await api.get(ENDPOINT_FETCH_USER_LIST);
+export const apiFetch: any = async (data: any) => await api.post(ENDPOINT_FETCH_USER_LIST, data);
 
-export const apiFetchUserDetails: any = async (data: any) => await api.get(ENDPOINT_FETCH_USER_DETAILS);
+export const apiFetchUserDetails: any = async (data: any) => await api.post(ENDPOINT_FETCH_USER_DETAILS, data);
 
-export const apiBalanceTransfer: any = async (data: any) => await api.get(ENDPOINT_BALANCE_TRANSFER);
+export const apiBalanceTransfer: any = async (data: any) => await api.post(ENDPOINT_BALANCE_TRANSFER, data);
 
 
 

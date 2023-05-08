@@ -23,7 +23,7 @@ const DepositMoneyModal = ({ close }: any) => {
 
     const onSubmit = (data: { amount: string }) => {
         console.log(data);
-        dispatch(getDeposit({ amount: parseInt(data.amount) }));
+        dispatch(getDeposit(data));
     };
 
 
@@ -39,7 +39,7 @@ const DepositMoneyModal = ({ close }: any) => {
                                 {...field}
                                 type="number"
                                 step="any"
-                                min="0"
+                                // min="0"
                                 readOnly={isDepositProcessing}
                                 className="form-control form-control-lg"
                                 id="amount"

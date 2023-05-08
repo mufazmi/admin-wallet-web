@@ -35,8 +35,9 @@ const walletSlice = createSlice({
     name: "wallet",
     initialState,
     reducers: {
-        getWalletSummaries: (state) => {
+        getWalletSummaries: (state, action: PayloadAction<any>) => {
             state.isSummariesLoading = true;
+            console.log(action)
         },
         setWalletSummaries: (state, action: PayloadAction<any>) => {
             state.isSummariesLoading = false;
@@ -73,18 +74,12 @@ const walletSlice = createSlice({
         },
 
         //Deposit
-        getDeposit: (state,action) => {
+        getDeposit: (state, action) => {
             state.isDepositProcessing = true;
         },
         setDeposit: (state, action: PayloadAction<any>) => {
             state.isDepositProcessing = false;
-            const { total_rows, page, limits, results } = action.payload;
-            state.metaData = {
-                total_rows,
-                page,
-                limits
-            }
-            state.walletSummaries = results
+            console.log(action.payload)
         },
         failedDeposit: (state) => {
             state.isDepositProcessing = false;

@@ -2,9 +2,9 @@ import { takeLatest, put, call } from "redux-saga/effects";
 import { apiBalanceTransfer, apiDeposit, apiFetchBalance, apiGetWalletSummaries, apiPurchaseOrder } from "../../http";
 import { setWalletSummaries, failedWalletSummaries, failedFetchBalance, failedDeposit, failedBalanceTransfer, failedPurchaseOrder, setDeposit, setBalanceTransfer, setPurchaseOrder } from "../slice/wallet-slice";
 
-function* workGetWalletSummaries(): Generator<any, void, any> {
+function* workGetWalletSummaries({payload}:any): Generator<any, void, any> {
   try {
-    const { status, data } = yield call(apiGetWalletSummaries);
+    const { status, data } = yield call(apiGetWalletSummaries,payload);
     yield put(status === 200 ? setWalletSummaries(data) : failedWalletSummaries(data));
   } catch (error: any) {
     yield put(failedWalletSummaries(error?.response?.data));
@@ -20,9 +20,10 @@ function* workGetFetchBalance(): Generator<any, void, any> {
   }
 }
 
-function* workGetDeposit(): Generator<any, void, any> {
+function* workGetDeposit({payload}:any): Generator<any, void, any> {
   try {
-    const { status, data } = yield call(apiDeposit);
+    console.log("payload",payload)
+    const { status, data } = yield call(apiDeposit,payload);
     yield put(status === 200 ? setDeposit(data) : failedDeposit(data));
   } catch (error: any) {
     yield put(failedDeposit(error?.response?.data));

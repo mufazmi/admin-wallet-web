@@ -8,7 +8,6 @@ import Utils from "../../../utils/utils";
 
 const OtpForm = () => {
 
-
     const dispatch = useDispatch();
 
     const { isLoading, errors: apiError, user } = useSelector((state: RootState) => state.auth)
