@@ -5,7 +5,9 @@ const DropDownRwo = ({data,index}:any) => {
     return (
         <li className="nav-item">
             <a className="nav-link" data-toggle="collapse" href={`#admin${index}`} aria-expanded="false" aria-controls="ui-basic">
-                <i className="icon-layout menu-icon"></i>
+                {/* <i className="icon-layout menu-icon"></i> */}
+                
+                <i className={'menu-icon '+ data?.parent_menu?.icon}></i>
                 <span className="menu-title">{data?.parent_menu?.pagename}</span>
                 <i className="menu-arrow"></i>
             </a>

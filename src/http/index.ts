@@ -5,9 +5,9 @@ import { ENDPOINT_BALANCE_TRANSFER, ENDPOINT_DEPOSIT, ENDPOINT_FETCH_BALANCE, EN
 const BASE_URL: string = config.API_URL;
 
 const token = localStorage.getItem('token');
+console.log(process.env.REACT_APP_ENV);
 const api = axios.create({
-    baseURL: BASE_URL,
-    // baseURL: 'https://mocki.io/v1/6960f8ab-6427-474d-9b82-1d8017993bac',
+    baseURL: process.env.REACT_APP_ENV === 'development' ? 'https://mocki.io/v1/6960f8ab-6427-474d-9b82-1d8017993bac' : BASE_URL,
     // withCredentials: true,
     headers: {
         apikey: 'X8QLN83WaShVTTxguWkD7sQZ5yd4tT',
@@ -15,6 +15,8 @@ const api = axios.create({
         Authorization: `${token}`
     }
 });
+
+console.log(process.env.REACT_APP_ENV)
 
 export const apiLogin: any = async (data: any) => await api.post(ENDPOINT_LOGIN, data);
 export const apiLoginVerification: any = async (data: any) => await api.post(ENDPOINT_LOGIN_VERIFICATION, data);
@@ -31,7 +33,7 @@ export const apiDeposit: any = async (data: any) => await api.post(ENDPOINT_DEPO
 
 export const apiPurchaseOrder: any = async (data: any) => await api.post(ENDPOINT_PURCHASE_ORDER, data);
 
-export const apiFetch: any = async (data: any) => await api.post(ENDPOINT_FETCH_USER_LIST, data);
+export const apiFetchUserList: any = async (data: any) => await api.post(ENDPOINT_FETCH_USER_LIST, data);
 
 export const apiFetchUserDetails: any = async (data: any) => await api.post(ENDPOINT_FETCH_USER_DETAILS, data);
 

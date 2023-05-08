@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../../redux/store";
 import { getDeposit } from "../../redux/slice/wallet-slice";
+import { useEffect, useState } from "react";
 
 const DepositMoneyModal = ({ close }: any) => {
 
@@ -15,7 +16,7 @@ const DepositMoneyModal = ({ close }: any) => {
         },
     });
 
-    const { errors: apiError, isDepositProcessing } = useSelector(
+    const { errors: apiError, deposites,isDepositProcessing } = useSelector(
         (state: RootState) => state.wallet
     );
 

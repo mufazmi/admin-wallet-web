@@ -16,7 +16,7 @@ const Table = ({ name, tr, children, onFilterButtonClicked }: ITable) => {
                         {
                             onFilterButtonClicked &&
                             <button onClick={onFilterButtonClicked} type="button" className="btn btn-primary btn-rounded btn-icon">
-                                <i className="mdi mdi-filter-outline"></i>
+                                <i className="fas fa-filter"></i>
                             </button>
                         }
                     </div>

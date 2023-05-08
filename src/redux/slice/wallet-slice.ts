@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Toast from "../../utils/toast";
 
 interface State {
     isLoading: boolean;
     isSummariesLoading: boolean;
     isFetchBalanceLoading: boolean;
     isDepositProcessing: boolean;
+    deposites: any[],
+    purchases: any[],
+    balance: {},
     isBalanceTransferLoading: boolean;
     isPurchaseOrderProcessing: boolean;
     walletSummaries: any[];
@@ -24,6 +28,9 @@ const initialState: State = {
     isDepositProcessing: false,
     isBalanceTransferLoading: true,
     isPurchaseOrderProcessing: false,
+    deposites: [],
+    purchases: [],
+    balance: {},
     walletSummaries: [],
     metaData: {},
     errors: {
@@ -60,13 +67,7 @@ const walletSlice = createSlice({
         },
         setFetchBalance: (state, action: PayloadAction<any>) => {
             state.isFetchBalanceLoading = false;
-            const { total_rows, page, limits, results } = action.payload;
-            state.metaData = {
-                total_rows,
-                page,
-                limits
-            }
-            state.walletSummaries = results
+            state.balance = action.payload.balances
         },
         failedFetchBalance: (state) => {
             state.isFetchBalanceLoading = false;
@@ -74,50 +75,45 @@ const walletSlice = createSlice({
         },
 
         //Deposit
-        getDeposit: (state, action) => {
+        getDeposit: (state, action: PayloadAction<any>) => {
             state.isDepositProcessing = true;
         },
         setDeposit: (state, action: PayloadAction<any>) => {
             state.isDepositProcessing = false;
+            state.deposites = action.payload
+            Toast.showSuccessToast(action.payload.message ?? 'Transaction Successfull')
             console.log(action.payload)
         },
         failedDeposit: (state) => {
             state.isDepositProcessing = false;
-            state.walletSummaries = [];
+            state.deposites = [];
         },
 
         //BalanceTransfer
-        getBalanceTransfer: (state) => {
+        getBalanceTransfer: (state, action: PayloadAction<any>) => {
             state.isBalanceTransferLoading = true;
         },
         setBalanceTransfer: (state, action: PayloadAction<any>) => {
-            state.isBalanceTransferLoading = false;
-            const { total_rows, page, limits, results } = action.payload;
-            state.metaData = {
-                total_rows,
-                page,
-                limits
-            }
-            state.walletSummaries = results
+            state.isPurchaseOrderProcessing = false;
+            state.purchases = action.payload
+            Toast.showSuccessToast(action.payload.message ?? 'Transaction Successfull')
+            console.log(action.payload)
         },
         failedBalanceTransfer: (state) => {
-            state.isBalanceTransferLoading = false;
-            state.walletSummaries = [];
+            state.isPurchaseOrderProcessing = false;
+            state.purchases = [];
         },
 
         //PurchaseOrder
-        getPurchaseOrder: (state) => {
+        getPurchaseOrder: (state, action: PayloadAction<any>) => {
             state.isPurchaseOrderProcessing = true;
         },
+
         setPurchaseOrder: (state, action: PayloadAction<any>) => {
             state.isPurchaseOrderProcessing = false;
-            const { total_rows, page, limits, results } = action.payload;
-            state.metaData = {
-                total_rows,
-                page,
-                limits
-            }
-            state.walletSummaries = results
+            state.purchases = action.payload
+            Toast.showSuccessToast(action.payload.message ?? 'Transaction Successfull')
+            console.log(action.payload)
         },
         failedPurchaseOrder: (state) => {
             state.isPurchaseOrderProcessing = false;

@@ -3,41 +3,43 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface DashboardState {
     isUserListLoading: boolean;
     isUserDetailsLoading: boolean;
-    navigations: any[];
+    // users: any[];
+    users: {};
 }
 
 const initialState: DashboardState = {
     isUserListLoading: true,
     isUserDetailsLoading: true,
-    navigations: [],
+    users: {},
+    // users: [],
 };
 
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        getUserList: (state) => {
+        getUserList: (state,action: PayloadAction<any>) => {
             state.isUserListLoading = true;
         },
         setUserList: (state, action: PayloadAction<any>) => {
             state.isUserListLoading = false;
-            state.navigations = action.payload;
+            state.users = action.payload?.user_list;
         },
         failedUserList: (state) => {
             state.isUserListLoading = false;
-            state.navigations = [];
+            state.users = [];
         },
 
-        getUserDetails: (state) => {
+        getUserDetails: (state,action: PayloadAction<any>) => {
             state.isUserDetailsLoading = true;
         },
         setUserDetails: (state, action: PayloadAction<any>) => {
             state.isUserDetailsLoading = false;
-            state.navigations = action.payload;
+            state.users = action.payload;
         },
         failedUserDetails: (state) => {
             state.isUserDetailsLoading = false;
-            state.navigations = [];
+            state.users = [];
         },
     },
 });

@@ -1,9 +1,11 @@
 import Modal from "../../components/modal/modal";
 import { useForm, Controller } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { getPurchaseOrder } from "../../redux/slice/wallet-slice";
 
 const PurchaseOrderModal = ({ close }: any) => {
+    const dispatch = useDispatch();
     const { handleSubmit, control, formState } = useForm({
         mode: "onChange",
         defaultValues: {
@@ -18,6 +20,7 @@ const PurchaseOrderModal = ({ close }: any) => {
     const { errors } = formState;
 
     const onSubmit = (data: { amount: string }) => {
+        dispatch(getPurchaseOrder(data));
         console.log(data);
     };
 

@@ -40,7 +40,6 @@ const WalletSummaryPage = () => {
 
     const onFilterButtonClicked = () => {
         setOpen(true);
-        console.log('1231')
     }
 
     return (

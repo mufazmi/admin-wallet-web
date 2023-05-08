@@ -39,9 +39,9 @@ function* workGetBalanceTransfer(): Generator<any, void, any> {
   }
 }
 
-function* workGetPurchaseOrder(): Generator<any, void, any> {
+function* workGetPurchaseOrder({payload}:any): Generator<any, void, any> {
   try {
-    const { status, data } = yield call(apiPurchaseOrder);
+    const { status, data } = yield call(apiPurchaseOrder,payload);
     yield put(status === 200 ? setPurchaseOrder(data) : failedPurchaseOrder(data));
   } catch (error: any) {
     yield put(failedPurchaseOrder(error?.response?.data));

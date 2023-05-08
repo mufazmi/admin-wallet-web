@@ -7,10 +7,13 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from 'react-router-dom'
 import WalletSummaryPage from "../pages/wallet/summary";
 import NotFoundPage from "../pages/error/404";
+import UserPage from "../pages/user";
+import MerchantPage from "../pages/merchant";
 
 const ROUTE_LOGIN = '/login'
 const ROUTE_DASHBOARD = '/'
 const ROUTE_WALLET_SUMMARY = '/wallet-summary'
+
 
 const PrivateRoutes = () => {
     const isAuth = useSelector((state: RootState) => state.auth.isAuth);
@@ -26,6 +29,8 @@ const MyRoute = () => {
             <Route element={<PrivateRoutes />}>
                 <Route path={ROUTE_DASHBOARD} element={<DashboardPage />} />
                 <Route path={'/dashboard'} element={<DashboardPage />} />
+                <Route path={'/merchant-list'} element={<MerchantPage />} />
+                <Route path={'/user-list'} element={<UserPage />} />
                 <Route path={ROUTE_WALLET_SUMMARY} element={<WalletSummaryPage />} />
             </Route>
             <Route path={ROUTE_LOGIN} element={<LoginPage />} />
