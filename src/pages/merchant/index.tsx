@@ -30,7 +30,7 @@ const MerchantPage = () => {
 
     return (
         <Layout>
-            <Table name="User List" tr={['Sr No. ', 'Name', 'Mobile', 'User ID', 'Status', 'Wallet']}>
+            <Table name="Merchant List" tr={['Sr No. ', 'Name', 'Mobile', 'User ID', 'Status', 'Wallet']}>
 
                 {/* {!isUserListLoading && users.map((e, index) => {
                     return <tr key={index}>

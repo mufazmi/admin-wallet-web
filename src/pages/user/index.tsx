@@ -5,6 +5,7 @@ import { RootState } from "../../redux/store";
 import { useEffect } from "react";
 import { getUserList } from "../../redux/slice/user-slice";
 import { useLocation } from "react-router-dom";
+import UserDetailsModal from "./user-detail-modal";
 
 
 const UserPage = () => {

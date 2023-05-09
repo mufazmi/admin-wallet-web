@@ -70,7 +70,7 @@ const Navbar = () => {
                             <p className="mb-0 font-weight-normal float-left dropdown-header">
                                 Notifications
                             </p>
-                            <a className="dropdown-item preview-item">
+                            {/* <a className="dropdown-item preview-item">
                                 <div className="preview-thumbnail">
                                     <div className="preview-icon bg-success">
                                         <i className="ti-info-alt mx-0"></i>
@@ -110,7 +110,7 @@ const Navbar = () => {
                                         2 days ago
                                     </p>
                                 </div>
-                            </a>
+                            </a> */}
                         </div>
                     </li>
                     <li className="nav-item nav-profile dropdown">
@@ -118,11 +118,11 @@ const Navbar = () => {
                             <img src="images/faces/face28.jpg" alt="profile" />
                         </a>
                         <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a className="dropdown-item">
+                            {/* <a className="dropdown-item">
                                 <i className="ti-settings text-primary"></i>
                                 Settings
-                            </a>
-                            <a className="dropdown-item" onClick={()=>onLogout()}>
+                            </a> */}
+                            <a className="dropdown-item" onClick={() => onLogout()}>
                                 <i className="ti-power-off text-primary"></i>
                                 Logout
                             </a>

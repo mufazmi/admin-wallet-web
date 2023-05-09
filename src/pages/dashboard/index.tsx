@@ -33,7 +33,7 @@ const DashboardPage = () => {
 
     useEffect(() => {
         dispatch(getFetchBalance());
-    },[]);
+    }, []);
 
     return (
         <Layout>
