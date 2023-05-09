@@ -32,8 +32,8 @@ const DashboardPage = () => {
     //Count Card
 
     useEffect(() => {
-        dispatch(getFetchBalance);
-    });
+        dispatch(getFetchBalance());
+    },[]);
 
     return (
         <Layout>
@@ -70,13 +70,13 @@ const DashboardPage = () => {
             }
 
             {/* DEPOSIT */}
-            <div className="col-lg-6">
+            <div className="col-lg-6 mt-3 mb-4">
                 <button type="button" onClick={() => setDepositOpen(true)} className="btn btn-info btn-lg btn-block">Deposit Money
                 </button>
             </div>
 
             {/* PURCHASE ORDER */}
-            <div className="col-lg-6">
+            <div className="col-lg-6 mt-3 mb-4">
                 <button type="button" onClick={() => setPurchaseOrderOpen(true)} className="btn btn-info btn-lg btn-block">Purchase Order
                 </button>
             </div>

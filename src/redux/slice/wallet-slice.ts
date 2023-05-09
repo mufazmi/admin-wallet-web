@@ -67,6 +67,7 @@ const walletSlice = createSlice({
         },
         setFetchBalance: (state, action: PayloadAction<any>) => {
             state.isFetchBalanceLoading = false;
+            console.log(action.payload)
             state.balance = action.payload.balances
         },
         failedFetchBalance: (state) => {

@@ -27,7 +27,7 @@ export const apiGetNavigations: any = async (data: any) => await api.get(ENDPOIN
 
 export const apiGetWalletSummaries: any = async (data: any) => await api.post(ENDPOINT_WALLET_SUMMARIES, data);
 
-export const apiFetchBalance: any = async (data: any) => await api.post(ENDPOINT_FETCH_BALANCE, data);
+export const apiFetchBalance: any = async (data?: any) => await api.get(ENDPOINT_FETCH_BALANCE);
 
 export const apiDeposit: any = async (data: any) => await api.post(ENDPOINT_DEPOSIT, data);
 
